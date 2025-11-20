@@ -3,9 +3,6 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-07-15',
     devtools: { enabled: true },
 
-    // Static Site Generation (SSG) configuration
-    ssr: false,
-
     app: {
         head: {
             title: 'dark1zinn | Full Stack Developer',
