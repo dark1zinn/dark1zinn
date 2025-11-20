@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            title: 'dark1zinn | Full Stack Developer',
+            title: 'dark1zinn',
             meta: [
                 { charset: 'utf-8' },
                 {
@@ -20,7 +20,7 @@ export default defineNuxtConfig({
                 { name: 'theme-color', content: '#a277ff' },
                 {
                     property: 'og:title',
-                    content: 'dark1zinn | Full Stack Developer',
+                    content: 'dark1zinn',
                 },
                 {
                     property: 'og:description',
@@ -28,19 +28,6 @@ export default defineNuxtConfig({
                         'Full Stack Developer from Brazil. Passionate about web development, DevOps, and modern technologies.',
                 },
                 { property: 'og:type', content: 'website' },
-            ],
-            link: [
-                { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-                { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-                {
-                    rel: 'preconnect',
-                    href: 'https://fonts.gstatic.com',
-                    crossorigin: '',
-                },
-                {
-                    rel: 'stylesheet',
-                    href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap',
-                },
             ],
         },
     },
