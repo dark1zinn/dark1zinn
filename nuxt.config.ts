@@ -34,5 +34,21 @@ export default defineNuxtConfig({
 
     css: ['~/assets/css/main.css'],
 
-    modules: ['@nuxt/ui', '@nuxt/image', '@nuxt/icon', '@nuxt/fonts'],
+    modules: [
+        '@nuxt/ui',
+        '@nuxt/image',
+        '@nuxt/icon',
+        '@nuxt/fonts',
+        '@nuxtjs/seo',
+    ],
+
+    colorMode: {
+        preference: 'dark',
+        fallback: 'dark',
+        classSuffix: '',
+    },
+
+    runtimeConfig: {
+        githubToken: process.env.GITHUB_TOKEN,
+    },
 });
