@@ -2,26 +2,27 @@
 
 ## Your Portfolio is Ready! 🎉
 
-I've created a **stunning, modern portfolio** for you with all the features from your GitHub profile, optimized for static deployment.
+I've created a **stunning, modern portfolio** for you, built with **Nuxt 4** and **Nuxt UI**, optimized for static deployment and locked to a premium dark mode.
 
 ## 📂 What's Inside
 
 ### **Sections**
 
-1. **Hero** - Animated introduction with code window
-2. **About** - Personal info and interests
-3. **Skills** - Tech stack organized by proficiency
-4. **Projects** - Featured work showcase
-5. **Contact** - Social links and terminal visual
-6. **Footer** - Navigation and metadata
+1.  **Hero** - Animated introduction with GitHub status integration.
+2.  **About** - Personal info, experience stats, and a creative "code block" bio.
+3.  **Skills** - Tech stack organized by proficiency (Daily Drivers, Familiar With, Explored).
+4.  **Projects** - Featured work showcase with empty state handling.
+5.  **Contact** - Social links and contact information.
+6.  **Footer** - Navigation and copyright.
 
 ### **Design Features**
 
--   🎨 Aura theme (purple/cyan colors)
--   ✨ Smooth animations throughout
--   💎 Glassmorphism effects
--   📱 Fully responsive
--   ⚡ Optimized performance
+-   🎨 **Pastel Purple Theme**: Defined centrally in `app.config.ts`.
+-   🌑 **Dark Mode Locked**: Optimized for a premium, immersive experience.
+-   ✨ **Smooth Animations**: Entry animations, hover effects, and marquees.
+-   💎 **Glassmorphism**: Modern translucent elements.
+-   📱 **Fully Responsive**: Looks great on mobile, tablet, and desktop.
+-   ⚡ **Static Site Generation**: Ready for GitHub Pages.
 
 ## 🎯 How to Use
 
@@ -30,6 +31,7 @@ I've created a **stunning, modern portfolio** for you with all the features from
 The dev server should already be running! If not:
 
 ```bash
+bun install
 bun run dev
 ```
 
@@ -37,153 +39,100 @@ Then open: **http://localhost:3000**
 
 ### 2. **Customize Content**
 
-#### Update Your Projects:
+This project is designed to be modular. You don't need to dig into complex component code to update your data.
 
-Edit `components/ProjectsSection.vue` - line 60+
+#### **Update Your Projects:**
+
+Edit `app/utils/projects.ts`.
+Simply add or remove objects from the `projects` array. If the array is empty, a "Work in Progress" placeholder will automatically appear.
 
 ```typescript
-const projects = [
+export const projects = [
     {
-        title: 'Your Project Name',
-        description: 'Description here',
-        icon: '🎨',
-        tech: ['Tech1', 'Tech2'],
-        status: 'active',
-        github: 'your-github-url',
-        demo: 'your-demo-url',
+        title: 'My New Project',
+        description: 'A brief description of what I built.',
+        icon: 'i-lucide-rocket', // Use any Lucide icon
+        link: 'https://github.com/yourusername/project',
+        tags: ['Vue', 'Nuxt', 'Tailwind'],
     },
+    // ...
 ];
 ```
 
-#### Update Your Skills:
+#### **Update Your Skills:**
 
-Edit `components/SkillsSection.vue` - line 75+
+Edit `app/utils/skills.ts`.
+You can modify `dailyDrivers`, `familiarWith`, and `explored` arrays to reflect your current tech stack.
 
-#### Change Colors:
+#### **Change Colors:**
 
-Edit `assets/css/main.css` - line 13+
+Edit `app/app.config.ts`.
+The theme uses semantic color names (`primary`, `secondary`, `success`, etc.) mapped to Tailwind colors.
 
-```css
---color-primary: #a277ff; /* Change this */
---color-accent: #61ffca; /* And this */
+```typescript
+export default defineAppConfig({
+    ui: {
+        colors: {
+            primary: 'violet', // Main brand color
+            secondary: 'purple', // Accents and gradients
+            success: 'green', // Status indicators
+            // ...
+        },
+    },
+});
 ```
 
 ### 3. **Deploy**
 
-#### Generate Static Site:
+#### **GitHub Pages (Recommended):**
+
+A workflow file is already set up for you at `.github/workflows/deploy.yml`.
+
+1.  Push your code to a GitHub repository.
+2.  Go to **Settings** -> **Pages**.
+3.  Set **Source** to **GitHub Actions**.
+4.  The action will automatically build and deploy your site on every push to `main`.
+
+#### **Manual Build:**
+
+To generate the static site locally:
 
 ```bash
 bun run generate
 ```
 
-#### Deploy to GitHub Pages:
-
-1. Push your code to GitHub
-2. Go to Settings → Pages
-3. Set source to GitHub Actions
-4. Create `.github/workflows/deploy.yml`:
-
-```yaml
-name: Deploy to GitHub Pages
-on:
-    push:
-        branches: [main]
-jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: oven-sh/setup-bun@v1
-            - run: bun install
-            - run: bun run generate
-            - uses: peaceiris/actions-gh-pages@v3
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./.output/public
-```
-
-#### Or Deploy to Netlify/Vercel:
-
-1. Connect your GitHub repo
-2. Build command: `bun run generate`
-3. Publish directory: `.output/public`
+The output will be in the `.output/public` directory.
 
 ## 🎨 Customization Tips
 
-### Add Your Photo:
+### **Update Profile Image:**
 
-1. Add image to `public/` folder
-2. Update `HeroSection.vue` to include it
+1.  Place your image in the `public/` folder (or use an external URL).
+2.  Update `app/components/HeroSection.vue` (line ~17) to reference your image.
 
-### Change Fonts:
+### **GitHub Status Integration:**
 
-Edit `nuxt.config.ts` - line 24
+The Hero section fetches your GitHub status.
 
-### Add More Sections:
-
-1. Create new component in `components/`
-2. Import in `pages/index.vue`
-
-### Modify Animations:
-
-Edit keyframes in `assets/css/main.css` - line 280+
+1.  Ensure your `GITHUB_TOKEN` is set if you are running in a context that needs higher rate limits (though public data is often sufficient).
+2.  The logic is in `app/utils/ghStatus.ts`.
 
 ## 📝 Important Files
 
--   `nuxt.config.ts` - Configuration
--   `assets/css/main.css` - All styles
--   `pages/index.vue` - Main page
--   `components/` - All sections
--   `public/` - Static assets (add favicon here!)
+-   `nuxt.config.ts`: Main Nuxt configuration (modules, fonts, SEO).
+-   `app/app.config.ts`: UI Theme and Color configuration.
+-   `app/utils/`: Data files for Projects and Skills.
+-   `app/components/`: UI Components (Hero, About, Skills, Projects, Contact).
+-   `app/layouts/default.vue`: Main layout structure (Header, Footer).
 
-## ✅ Checklist
+## ✅ Checklist Before Deploying
 
-Before deploying:
-
--   [ ] Update all social media links
--   [ ] Add real project links (remove `#` placeholders)
--   [ ] Add favicon to `public/favicon.ico`
--   [ ] Update meta descriptions
--   [ ] Test on mobile devices
--   [ ] Run `bun run generate` successfully
-
-## 🐛 Troubleshooting
-
-**Dev server not working?**
-
-```bash
-# Stop current server (Ctrl+C)
-bun install
-bun run dev
-```
-
-**Build errors?**
-
--   Check all imports are correct
--   Ensure all components are in `components/` folder
--   Verify syntax in all `.vue` files
-
-**Styles not loading?**
-
--   Check `nuxt.config.ts` has `css: ['~/assets/css/main.css']`
--   Clear `.nuxt` folder and restart
+-   [ ] Update `app/utils/projects.ts` with your real projects.
+-   [ ] Update `app/utils/skills.ts` with your actual skills.
+-   [ ] Update social links in `app/components/ContactSection.vue`.
+-   [ ] Update your bio and stats in `app/components/AboutSection.vue`.
+-   [ ] Check `nuxt.config.ts` `app.baseURL` if deploying to a subpath (like `/repo-name/`).
 
 ## 🎉 You're All Set!
 
-Your portfolio is:
-
--   ✅ Modern and professional
--   ✅ Optimized for static hosting
--   ✅ SEO friendly
--   ✅ Fully responsive
--   ✅ Easy to customize
-
-**Next:** Open http://localhost:3000 and see your amazing portfolio! 🚀
-
----
-
-Need help? Check:
-
--   `DEVELOPMENT_SUMMARY.md` - Full feature list
--   `PORTFOLIO_README.md` - Detailed documentation
--   Nuxt docs: https://nuxt.com/docs
+**Next:** Open http://localhost:3000 and start personalizing your portfolio! 🚀
