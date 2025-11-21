@@ -48,7 +48,7 @@ const repos = await ghRepos()
                 <!-- Visual/Code Block -->
                 <div class="relative group">
                     <div
-                        class="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
+                        class="absolute -inset-0.5 bg-linear-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
                     </div>
                     <div
                         class="relative bg-[#1e1e2e] rounded-2xl border border-white/10 shadow-2xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]">

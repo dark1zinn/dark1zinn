@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            title: 'dark1zinn',
+            title: 'Home',
             meta: [
                 { charset: 'utf-8' },
                 {
@@ -46,9 +46,5 @@ export default defineNuxtConfig({
         preference: 'dark',
         fallback: 'dark',
         classSuffix: '',
-    },
-
-    runtimeConfig: {
-        githubToken: process.env.GITHUB_TOKEN,
     },
 });

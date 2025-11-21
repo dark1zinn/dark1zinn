@@ -28,7 +28,7 @@ const links = [
                         <NuxtImg src="https://github.com/dark1zinn.png" alt="Logo" class="w-full h-full object-cover" />
                     </div>
                     <span
-                        class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-purple-500">
+                        class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-linear-to-r from-primary-500 to-purple-500">
                         dark1zinn
                     </span>
                 </NuxtLink>
@@ -58,7 +58,7 @@ const links = [
             <UContainer class="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="flex flex-col items-center md:items-start gap-2">
                     <span
-                        class="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-purple-500">
+                        class="font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary-500 to-purple-500">
                         dark1zinn
                     </span>
                     <p class="text-sm text-neutral-500 dark:text-neutral-400">
