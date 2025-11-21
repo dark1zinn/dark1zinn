@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
 
     app: {
+        baseURL: '/dark1zinn/',
         head: {
             title: 'Home',
             meta: [
