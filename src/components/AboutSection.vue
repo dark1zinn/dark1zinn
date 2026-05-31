@@ -1,16 +1,26 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import ghRepos from '@/utils/ghRepos'
-const repos = await ghRepos()
+
+const repos = ref<number>(0)
+
+onMounted(async () => {
+    try {
+        repos.value = await ghRepos()
+    } catch {
+        repos.value = 0
+    }
+})
 </script>
+
 <template>
     <section id="about" class="py-24 relative">
         <UContainer>
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Text Content -->
                 <div class="space-y-6">
                     <div
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 text-sm font-medium">
-                        <UIcon name="i-lucide-user" class="w-4 h-4" />
+                        <UIcon name="lucide:user" class="w-4 h-4" />
                         About Me
                     </div>
 
@@ -44,8 +54,6 @@ const repos = await ghRepos()
                     </div>
                 </div>
 
-                <!-- Visual/Code Block -->
-                <!-- Visual/Code Block -->
                 <div class="relative group">
                     <div
                         class="absolute -inset-0.5 bg-linear-to-r from-primary-500 to-secondary-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200">
@@ -65,7 +73,7 @@ const repos = await ghRepos()
                             <pre class="font-mono text-sm leading-7 text-[#cdd6f4]"><code><span class="text-[#cba6f7]">const</span> <span class="text-[#f9e2af]">developer</span> <span class="text-[#89b4fa]">=</span> <span class="text-[#9399b2]">{</span>
   <span class="text-[#f38ba8]">name</span><span class="text-[#89b4fa]">:</span> <span class="text-[#a6e3a1]">'dark1zinn'</span><span class="text-[#9399b2]">,</span>
   <span class="text-[#f38ba8]">role</span><span class="text-[#89b4fa]">:</span> <span class="text-[#a6e3a1]">'Full Stack Dev'</span><span class="text-[#9399b2]">,</span>
-  <span class="text-[#f38ba8]">location</span><span class="text-[#89b4fa]">:</span> <span class="text-[#a6e3a1]">'Brazil <UIcon name="cif:br" />'</span><span class="text-[#9399b2]">,</span>
+  <span class="text-[#f38ba8]">location</span><span class="text-[#89b4fa]">:</span> <span class="text-[#a6e3a1]">'Brazil 🇧🇷'</span><span class="text-[#9399b2]">,</span>
   <span class="text-[#f38ba8]">traits</span><span class="text-[#89b4fa]">:</span> <span class="text-[#9399b2]">[</span>
     <span class="text-[#a6e3a1]">'Creative'</span><span class="text-[#9399b2]">,</span>
     <span class="text-[#a6e3a1]">'Curious'</span><span class="text-[#9399b2]">,</span>

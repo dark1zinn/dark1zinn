@@ -1,53 +1,42 @@
 
-# Workflow for building and deploying a Nuxt.js site to GitHub Pages
-name: Deploy Nuxt.js site to Pages
+# Workflow for building and deploying the portfolio to GitHub Pages
+name: Deploy site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
-    branches: ["main"] # Or your default branch, e.g., master
-  pull_request:
-    branches: ["main"] # Or your default branch, e.g., master
-
-  # Allows you to run this workflow manually from the Actions tab
+    branches: ["main"]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v2 # Yes, we are using Bun
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
       - name: Install Dependencies
         run: bun install
-      - name: Build Nuxt.js site
-        run: bun run generate
+      - name: Build site
+        run: bun run build
       - name: Create .nojekyll file
-        run: touch ./.output/public/.nojekyll # Prevents GitHub Pages from running Jekyll
+        run: touch ./dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the output directory
-          path: ./.output/public
+          path: ./dist
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages

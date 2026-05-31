@@ -1,23 +1,36 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import ghStatus from '@/utils/ghStatus'
-const data = await ghStatus()
+
+type Status = Awaited<ReturnType<typeof ghStatus>>
+
+const data = ref<Status | null>(null)
+
+onMounted(async () => {
+    try {
+        data.value = await ghStatus()
+    } catch {
+        data.value = { message: 'Offline', emojiHTML: '😴' }
+    }
+})
 </script>
 
 <template>
     <section class="relative min-h-[80vh] flex items-center justify-center py-20 overflow-hidden">
         <UContainer class="relative z-10 flex flex-col items-center text-center">
 
-            <!-- Profile & Status -->
             <div class="relative mb-8 group">
                 <div
                     class="absolute -inset-1 bg-linear-to-r from-primary-500 to-secondary-600 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt">
                 </div>
                 <div class="relative">
-                    <NuxtImg src="https://github.com/dark1zinn.png" alt="Profile"
+                    <img
+                        src="https://github.com/dark1zinn.png"
+                        alt="Profile"
                         class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-neutral-900 object-cover shadow-2xl" />
 
-                    <!-- Status Badge -->
-                    <div v-if="data"
+                    <div
+                        v-if="data"
                         class="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 flex items-center gap-2 bg-white dark:bg-neutral-800 px-3 py-1.5 rounded-full shadow-lg border border-neutral-200 dark:border-neutral-700 animate-bounce-in">
                         <span v-html="data.emojiHTML" class="text-xl leading-none"></span>
                         <span
@@ -28,7 +41,6 @@ const data = await ghStatus()
                 </div>
             </div>
 
-            <!-- Headlines -->
             <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-4">
                 <span
                     class="bg-clip-text text-transparent bg-linear-to-r from-primary-500 via-secondary-500 to-primary-500 animate-gradient-x">
@@ -41,25 +53,31 @@ const data = await ghStatus()
                 <span class="text-primary-500">Building digital dreams with code.</span>
             </p>
 
-            <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row items-center gap-4">
-                <UButton to="#projects" size="xl" color="primary" variant="solid"
+                <UButton
+                    to="#projects"
+                    size="xl"
+                    color="primary"
+                    variant="solid"
                     class="px-8 py-3 font-bold shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 hover:-translate-y-1 transition-all"
-                    icon="i-lucide-rocket">
+                    icon="lucide:rocket">
                     View Projects
                 </UButton>
-                <UButton to="#contact" size="xl" variant="ghost" color="neutral"
+                <UButton
+                    to="#contact"
+                    size="xl"
+                    variant="ghost"
+                    color="neutral"
                     class="px-8 py-3 font-bold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all"
-                    icon="i-lucide-message-circle">
+                    icon="lucide:message-circle">
                     Contact Me
                 </UButton>
             </div>
 
         </UContainer>
 
-        <!-- Scroll Down -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <UIcon name="i-lucide-chevron-down" class="w-6 h-6 text-neutral-400" />
+            <UIcon name="lucide:chevron-down" class="w-6 h-6 text-neutral-400" />
         </div>
     </section>
 </template>

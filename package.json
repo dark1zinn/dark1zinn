@@ -3,21 +3,23 @@
   "type": "module",
   "private": false,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@nuxt/fonts": "0.12.1",
-    "@nuxt/icon": "2.1.0",
-    "@nuxt/image": "2.0.0",
+    "@iconify/vue": "^5.0.0",
     "@nuxt/ui": "^4.2.0",
-    "@nuxtjs/seo": "3.2.2",
-    "nuxt": "^4.2.1",
-    "typescript": "^5.6.3",
+    "@unhead/vue": "^2.0.19",
+    "tailwindcss": "^4.1.18",
     "vue": "^3.5.24",
-    "vue-router": "^4.6.3"
+    "vue-router": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.3",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "typescript": "^5.6.3",
+    "vite": "^7.3.0",
+    "vue-tsc": "^3.1.8"
   }
 }
