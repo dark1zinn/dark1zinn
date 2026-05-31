@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { projects } from '@/utils/projects'
-
 </script>
 
 <template>
@@ -10,7 +9,7 @@ import { projects } from '@/utils/projects'
                 <div>
                     <div
                         class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
-                        <UIcon name="i-lucide-briefcase" class="w-4 h-4" />
+                        <UIcon name="lucide:briefcase" class="w-4 h-4" />
                         Portfolio
                     </div>
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
@@ -19,18 +18,26 @@ import { projects } from '@/utils/projects'
                         challenges.
                     </p>
                 </div>
-                <UButton to="https://github.com/dark1zinn?tab=repositories" target="_blank" variant="ghost"
-                    color="neutral" icon="i-lucide-arrow-right" trailing class="group">
+                <UButton
+                    to="https://github.com/dark1zinn?tab=repositories"
+                    target="_blank"
+                    variant="ghost"
+                    color="neutral"
+                    icon="lucide:arrow-right"
+                    trailing
+                    class="group">
                     View All Repositories
                 </UButton>
             </div>
 
             <div v-if="projects.length" class="grid md:grid-cols-2 gap-8">
-                <UCard v-for="project in projects" :key="project.title"
+                <UCard
+                    v-for="project in projects"
+                    :key="project.title"
                     class="group relative overflow-hidden border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                     :ui="{ body: 'h-full flex flex-col' }">
                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <UIcon name="i-lucide-arrow-up-right" class="w-6 h-6 text-primary-500" />
+                        <UIcon name="lucide:arrow-up-right" class="w-6 h-6 text-primary-500" />
                     </div>
 
                     <div class="flex items-start gap-4 mb-4">
@@ -40,9 +47,12 @@ import { projects } from '@/utils/projects'
                         </div>
                         <div>
                             <h3 class="text-xl font-bold mb-1 group-hover:text-primary-500 transition-colors">{{
-                                project.title }}</h3>
+                                project.title
+                            }}</h3>
                             <div class="flex flex-wrap gap-2">
-                                <span v-for="tag in project.tags" :key="tag"
+                                <span
+                                    v-for="tag in project.tags"
+                                    :key="tag"
                                     class="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
                                     {{ tag }}
                                 </span>
@@ -54,7 +64,12 @@ import { projects } from '@/utils/projects'
                         {{ project.description }}
                     </p>
 
-                    <UButton :to="project.link" target="_blank" block variant="soft" color="neutral"
+                    <UButton
+                        :to="project.link"
+                        target="_blank"
+                        block
+                        variant="soft"
+                        color="neutral"
                         class="group-hover:bg-primary-50 dark:group-hover:bg-primary-950/30 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         View Source
                     </UButton>
@@ -63,7 +78,7 @@ import { projects } from '@/utils/projects'
 
             <div v-else class="flex flex-col items-center justify-center py-24 text-center">
                 <div class="p-6 rounded-full bg-neutral-100 dark:bg-neutral-800 mb-4 animate-pulse">
-                    <UIcon name="i-lucide-hard-hat" class="w-12 h-12 text-neutral-400" />
+                    <UIcon name="lucide:hard-hat" class="w-12 h-12 text-neutral-400" />
                 </div>
                 <p class="text-xl font-medium text-neutral-500 dark:text-neutral-400">
                     This is a work in progress

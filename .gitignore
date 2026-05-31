@@ -114,3 +114,15 @@ dist
 
 # Nix
 .direnv
+
+# Vite
+dist
+
+# Nuxt UI / Vue Router auto-generated
+auto-imports.d.ts
+components.d.ts
+src/route-map.d.ts
+
+# Nuxt (legacy)
+.nuxt
+.output
