@@ -29,13 +29,13 @@ jobs:
       - name: Install Dependencies
         run: bun install
       - name: Build site
-        run: bun run build
+        run: bun run --filter @dark1zinn/web build
       - name: Create .nojekyll file
-        run: touch ./dist/.nojekyll
+        run: touch ./web/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./web/dist
 
   deploy:
     environment:
