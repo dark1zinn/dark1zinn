@@ -33,14 +33,6 @@
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=dark1zinn&theme=high-contrast&hide_border=true&bg_color=0d1117&color=a277ff&line=61ffca&point=a277ff" alt="Contribution Graph" />
 </div>
 
-## 🎵 Currently Vibing To
-
-<div align="center">
-  <a href="https://open.spotify.com/user/31nnjkyz26lugjcn7tz5tckcioke">
-    <img src="https://spotify-recently-played-readme.vercel.app/api?user=31nnjkyz26lugjcn7tz5tckcioke&count=3&unique=true&width=600" alt="Spotify recently played" />
-  </a>
-</div>
-
 ## 🔧 Usually messing with
 
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
