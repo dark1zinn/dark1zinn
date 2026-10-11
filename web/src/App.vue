@@ -2,11 +2,11 @@
 import { toIconifyName } from '@/utils/icon'
 
 const links = [
-    { label: 'Home', to: '/', icon: toIconifyName('i-lucide-home') },
-    { label: 'About', to: '#about', icon: toIconifyName('i-lucide-user') },
-    { label: 'Skills', to: '#skills', icon: toIconifyName('i-lucide-cpu') },
-    { label: 'Projects', to: '#projects', icon: toIconifyName('i-lucide-code') },
-    { label: 'Contact', to: '#contact', icon: toIconifyName('i-lucide-mail') },
+    { label: 'Home', to: '/', icon: toIconifyName('i-lucide-house') },
+    { label: 'About', to: '#about', icon: toIconifyName('i-lucide-user-round') },
+    { label: 'Skills', to: '#skills', icon: toIconifyName('i-lucide-layers-3') },
+    { label: 'Projects', to: '#projects', icon: toIconifyName('i-lucide-folder-code') },
+    { label: 'Contact', to: '#contact', icon: toIconifyName('i-lucide-send') },
 ]
 
 function navTarget(to: string) {
@@ -19,33 +19,23 @@ function navTarget(to: string) {
 
 <template>
     <UApp>
-        <div
-            class="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 selection:bg-primary-500/30 selection:text-primary-400">
-            <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                <div
-                    class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-500/10 rounded-full blur-[120px] animate-pulse" />
-                <div
-                    class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[120px] animate-pulse delay-1000" />
+        <div class="min-h-screen overflow-x-hidden bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50">
+            <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+                <div class="absolute -top-48 left-[10%] h-96 w-96 rounded-full bg-primary-500/10 blur-[120px]" />
+                <div class="absolute top-[42rem] -right-48 h-96 w-96 rounded-full bg-secondary-500/10 blur-[120px]" />
             </div>
 
-            <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
-                <div
-                    class="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-neutral-200/50 dark:border-neutral-800/50 rounded-full px-6 py-3 shadow-lg shadow-neutral-900/5 flex items-center justify-between transition-all duration-300 hover:bg-white/80 dark:hover:bg-neutral-900/80">
-                    <RouterLink to="/" class="flex items-center gap-2 group">
-                        <div
-                            class="relative w-8 h-8 overflow-hidden rounded-full ring-2 ring-primary-500/50 group-hover:ring-primary-500 transition-all">
-                            <img
-                                src="https://github.com/dark1zinn.png"
-                                alt="Logo"
-                                class="w-full h-full object-cover" />
-                        </div>
-                        <span
-                            class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-linear-to-r from-primary-500 to-purple-500">
-                            dark1zinn
-                        </span>
+            <header class="sticky top-0 z-50 border-b border-neutral-200/70 bg-neutral-50/85 backdrop-blur-xl dark:border-neutral-800/70 dark:bg-neutral-950/85">
+                <UContainer class="flex min-h-16 items-center justify-between gap-4">
+                    <RouterLink to="/" class="group inline-flex shrink-0 items-center gap-2 focus-visible:outline-none">
+                        <img
+                            src="https://github.com/dark1zinn.png"
+                            alt="dark1zinn"
+                            class="h-8 w-8 rounded-full border border-primary-500/40 object-cover transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105" />
+                        <span class="font-semibold tracking-tight">dark1zinn</span>
                     </RouterLink>
 
-                    <nav class="hidden md:flex items-center gap-1">
+                    <nav aria-label="Primary navigation" class="flex min-w-0 items-center gap-1 overflow-x-auto">
                         <UButton
                             v-for="link in links"
                             :key="link.to"
@@ -54,45 +44,33 @@ function navTarget(to: string) {
                             variant="ghost"
                             color="neutral"
                             size="sm"
-                            class="hover:bg-primary-50 dark:hover:bg-primary-950/30 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                            {{ link.label }}
+                            class="shrink-0 text-xs hover:bg-primary-50 hover:text-primary-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:hover:bg-primary-950/40 dark:hover:text-primary-300 sm:text-sm">
+                            <span class="hidden sm:inline">{{ link.label }}</span>
+                            <span class="sr-only sm:hidden">{{ link.label }}</span>
                         </UButton>
                     </nav>
 
-                    <div class="flex items-center gap-2">
-                        <UButton
-                            to="https://github.com/dark1zinn"
-                            target="_blank"
-                            :icon="toIconifyName('i-simple-icons-github')"
-                            variant="ghost"
-                            color="neutral"
-                            size="sm"
-                            aria-label="GitHub"
-                            class="hover:scale-110 transition-transform" />
-                    </div>
-                </div>
+                    <UButton
+                        to="https://github.com/dark1zinn"
+                        target="_blank"
+                        rel="noreferrer"
+                        :icon="toIconifyName('i-simple-icons-github')"
+                        variant="ghost"
+                        color="neutral"
+                        size="sm"
+                        aria-label="Open dark1zinn's GitHub profile"
+                        class="shrink-0 hover:bg-primary-50 hover:text-primary-700 focus-visible:ring-2 focus-visible:ring-primary-500 dark:hover:bg-primary-950/40 dark:hover:text-primary-300" />
+                </UContainer>
             </header>
 
-            <main class="flex-1 relative z-10 pt-24">
+            <main class="relative">
                 <RouterView />
             </main>
 
-            <footer
-                class="relative z-10 py-12 border-t border-neutral-200/50 dark:border-neutral-800/50 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-sm">
-                <UContainer class="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex flex-col items-center md:items-start gap-2">
-                        <span
-                            class="font-bold text-xl bg-clip-text text-transparent bg-linear-to-r from-primary-500 to-purple-500">
-                            dark1zinn
-                        </span>
-                        <p class="text-sm text-neutral-500 dark:text-neutral-400">
-                            Building digital experiences with ❤️ and ☕
-                        </p>
-                    </div>
-
-                    <p class="text-xs text-neutral-400 dark:text-neutral-500">
-                        © {{ new Date().getFullYear() }} dark1zinn. All rights reserved.
-                    </p>
+            <footer class="border-t border-neutral-200/70 dark:border-neutral-800/70">
+                <UContainer class="flex flex-col gap-2 py-8 text-sm text-neutral-500 sm:flex-row sm:items-center sm:justify-between dark:text-neutral-400">
+                    <p>Designing dependable software, one system at a time.</p>
+                    <p>© {{ new Date().getFullYear() }} dark1zinn</p>
                 </UContainer>
             </footer>
         </div>

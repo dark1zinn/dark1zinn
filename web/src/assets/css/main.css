@@ -3,12 +3,44 @@
 
 :root {
   font-family: 'Outfit', sans-serif;
-}
-
-body {
-  @apply bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50 antialiased;
+  color-scheme: light dark;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-neutral-50 text-neutral-900 antialiased dark:bg-neutral-950 dark:text-neutral-50;
+}
+
+:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary-500;
+}
+
+.section-space {
+  @apply py-20 sm:py-28 lg:py-32;
+}
+
+.section-kicker {
+  @apply text-sm font-semibold uppercase tracking-[0.18em] text-primary-600 dark:text-primary-300;
+}
+
+.content-measure {
+  max-width: 38rem;
+}
+
+.surface-card {
+  @apply rounded-2xl border border-neutral-200/80 bg-neutral-50/80 p-5 dark:border-neutral-800 dark:bg-neutral-900/70;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
