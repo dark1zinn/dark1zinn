@@ -8,27 +8,6 @@ type Skill = {
 
 const icon = (name: string) => toIconifyName(name)
 
-export const items = [
-    {
-        label: 'Daily Drivers',
-        icon: icon('i-lucide-flame'),
-        slot: 'daily-drivers',
-        description: 'My go-to technologies for building robust applications.',
-    },
-    {
-        label: 'Familiar With',
-        icon: icon('i-lucide-wrench'),
-        slot: 'familiar-with',
-        description: 'Tools I have experience with and can use effectively.',
-    },
-    {
-        label: 'Explored',
-        icon: icon('i-lucide-flask-conical'),
-        slot: 'explored',
-        description:
-            'Technologies I have experimented with or used in the past.',
-    },
-]
 
 export const dailyDrivers: Skill[] = [
     {

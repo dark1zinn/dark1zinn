@@ -3,87 +3,65 @@ import { projects } from '@/utils/projects'
 </script>
 
 <template>
-    <section id="projects" class="py-24 relative">
+    <section id="projects" class="section-space border-y border-neutral-200/70 bg-white/40 dark:border-neutral-800/70 dark:bg-neutral-900/20">
         <UContainer>
-            <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
-                <div>
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
-                        <UIcon name="lucide:briefcase" class="w-4 h-4" />
-                        Portfolio
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-                    <p class="text-neutral-600 dark:text-neutral-400 max-w-xl">
-                        A collection of projects that I've worked on, ranging from configuration files to algorithmic
-                        challenges.
+            <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                <div class="max-w-2xl">
+                    <p class="section-kicker">Selected work</p>
+                    <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                        Tools built for real developer workflows.
+                    </h2>
+                    <p class="mt-5 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+                        A selection of open-source projects spanning developer experience, systems, and application infrastructure.
                     </p>
                 </div>
                 <UButton
                     to="https://github.com/dark1zinn?tab=repositories"
                     target="_blank"
-                    variant="ghost"
+                    rel="noreferrer"
+                    variant="outline"
                     color="neutral"
-                    icon="lucide:arrow-right"
-                    trailing
-                    class="group">
-                    View All Repositories
+                    icon="lucide:github"
+                    trailing-icon="lucide:arrow-up-right">
+                    View all repositories
                 </UButton>
             </div>
 
-            <div v-if="projects.length" class="grid md:grid-cols-2 gap-8">
-                <UCard
-                    v-for="project in projects"
-                    :key="project.title"
-                    class="group relative overflow-hidden border-neutral-200 dark:border-neutral-800 hover:border-primary-500 dark:hover:border-primary-500 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                    :ui="{ body: 'h-full flex flex-col' }">
-                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <UIcon name="lucide:arrow-up-right" class="w-6 h-6 text-primary-500" />
-                    </div>
-
-                    <div class="flex items-start gap-4 mb-4">
-                        <div
-                            class="p-3 rounded-xl bg-primary-50 dark:bg-primary-950/50 text-primary-600 dark:text-primary-400 group-hover:scale-110 transition-transform duration-300">
-                            <UIcon :name="project.icon" class="w-8 h-8" />
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-1 group-hover:text-primary-500 transition-colors">{{
-                                project.title
-                            }}</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <span
-                                    v-for="tag in project.tags"
-                                    :key="tag"
-                                    class="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
-                                    {{ tag }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="text-neutral-600 dark:text-neutral-300 mb-6 flex-1 leading-relaxed">
-                        {{ project.description }}
-                    </p>
-
-                    <UButton
-                        :to="project.link"
+            <ul class="mt-12 grid gap-5 md:grid-cols-2" aria-label="Selected GitHub projects">
+                <li v-for="project in projects" :key="project.title">
+                    <a
+                        :href="project.link"
                         target="_blank"
-                        block
-                        variant="soft"
-                        color="neutral"
-                        class="group-hover:bg-primary-50 dark:group-hover:bg-primary-950/30 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                        View Source
-                    </UButton>
-                </UCard>
-            </div>
-
-            <div v-else class="flex flex-col items-center justify-center py-24 text-center">
-                <div class="p-6 rounded-full bg-neutral-100 dark:bg-neutral-800 mb-4 animate-pulse">
-                    <UIcon name="lucide:hard-hat" class="w-12 h-12 text-neutral-400" />
-                </div>
-                <p class="text-xl font-medium text-neutral-500 dark:text-neutral-400">
-                    This is a work in progress
-                </p>
-            </div>
+                        rel="noreferrer"
+                        class="group surface-card flex h-full flex-col transition duration-200 hover:-translate-y-1 hover:border-primary-400 hover:shadow-lg hover:shadow-primary-950/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+                        <div class="flex items-start justify-between gap-4">
+                            <div class="flex items-center gap-3">
+                                <span class="rounded-xl bg-primary-50 p-3 text-primary-700 dark:bg-primary-950/40 dark:text-primary-300">
+                                    <UIcon :name="project.icon" class="h-5 w-5" />
+                                </span>
+                                <h3 class="text-xl font-semibold group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                                    {{ project.title }}
+                                </h3>
+                            </div>
+                            <UIcon name="lucide:arrow-up-right" class="mt-1 h-5 w-5 text-neutral-400 transition group-hover:text-primary-600 dark:group-hover:text-primary-300" />
+                        </div>
+                        <p class="mt-5 flex-1 leading-7 text-neutral-600 dark:text-neutral-300">
+                            {{ project.description }}
+                        </p>
+                        <ul class="mt-6 flex flex-wrap gap-2" :aria-label="`${project.title} technologies`">
+                            <li
+                                v-for="tag in project.tags"
+                                :key="tag"
+                                class="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+                                {{ tag }}
+                            </li>
+                        </ul>
+                        <span class="mt-6 text-sm font-semibold text-primary-700 dark:text-primary-300">
+                            Open source on GitHub <span class="sr-only">— opens in a new tab</span>
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </UContainer>
     </section>
 </template>

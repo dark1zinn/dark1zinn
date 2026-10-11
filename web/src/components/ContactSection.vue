@@ -1,72 +1,79 @@
 <script setup lang="ts">
 import { toIconifyName } from '@/utils/icon'
 
-const socials = [
+const primaryContacts = [
+    {
+        name: 'Email',
+        description: 'dark1zinn00@gmail.com',
+        icon: toIconifyName('i-lucide-mail'),
+        link: 'mailto:dark1zinn00@gmail.com',
+    },
+    {
+        name: 'GitHub',
+        description: 'github.com/dark1zinn',
+        icon: toIconifyName('i-simple-icons-github'),
+        link: 'https://github.com/dark1zinn',
+    },
+]
+
+const socialContacts = [
     {
         name: 'Discord',
         icon: toIconifyName('i-simple-icons-discord'),
         link: 'https://discord.com/users/617089012003241994',
-        color: 'hover:text-[#5865F2]',
     },
     {
         name: 'Instagram',
         icon: toIconifyName('i-simple-icons-instagram'),
         link: 'https://www.instagram.com/dark1zinn/',
-        color: 'hover:text-[#E4405F]',
-    },
-    {
-        name: 'Twitch',
-        icon: toIconifyName('i-simple-icons-twitch'),
-        link: 'https://www.twitch.tv/dark1zin_',
-        color: 'hover:text-[#9146FF]',
-    },
-    {
-        name: 'YouTube',
-        icon: toIconifyName('i-simple-icons-youtube'),
-        link: 'https://www.youtube.com/@dark1zin_',
-        color: 'hover:text-[#FF0000]',
-    },
-    {
-        name: 'GitHub',
-        icon: toIconifyName('i-simple-icons-github'),
-        link: 'https://github.com/dark1zinn',
-        color: 'hover:text-neutral-900 dark:hover:text-white',
     },
 ]
 </script>
 
 <template>
-    <section id="contact" class="py-32 relative overflow-hidden">
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-[100px] -z-10" />
+    <section id="contact" class="section-space">
+        <UContainer>
+            <div class="mx-auto max-w-3xl text-center">
+                <p class="section-kicker">Contact</p>
+                <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                    Let’s build something dependable.
+                </h2>
+                <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+                    Reach out for collaborations, technical conversations, or ideas worth making real.
+                </p>
 
-        <UContainer class="max-w-3xl text-center relative z-10">
-            <div
-                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 dark:bg-primary-950/30 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
-                <UIcon name="lucide:send" class="w-4 h-4" />
-                Get in Touch
-            </div>
+                <div class="mt-10 grid gap-4 sm:grid-cols-2">
+                    <a
+                        v-for="contact in primaryContacts"
+                        :key="contact.name"
+                        :href="contact.link"
+                        :target="contact.name === 'GitHub' ? '_blank' : undefined"
+                        :rel="contact.name === 'GitHub' ? 'noreferrer' : undefined"
+                        class="surface-card group flex items-center gap-4 text-left transition duration-200 hover:-translate-y-1 hover:border-primary-400 hover:shadow-lg hover:shadow-primary-950/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500">
+                        <span class="rounded-xl bg-primary-50 p-3 text-primary-700 dark:bg-primary-950/40 dark:text-primary-300">
+                            <UIcon :name="contact.icon" class="h-5 w-5" />
+                        </span>
+                        <span class="min-w-0">
+                            <span class="block text-sm text-neutral-500 dark:text-neutral-400">{{ contact.name }}</span>
+                            <span class="block truncate font-semibold group-hover:text-primary-700 dark:group-hover:text-primary-300">
+                                {{ contact.description }}
+                            </span>
+                        </span>
+                    </a>
+                </div>
 
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Work Together</h2>
-            <p class="text-xl text-neutral-600 dark:text-neutral-300 mb-12 leading-relaxed">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
-                <br />
-                <span class="text-primary-500 font-medium">Most active on Discord!</span>
-            </p>
-
-            <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
-                <UButton
-                    v-for="social in socials"
-                    :key="social.name"
-                    :to="social.link"
-                    target="_blank"
-                    size="xl"
-                    variant="outline"
-                    color="neutral"
-                    class="transition-all hover:scale-110"
-                    :class="social.color"
-                    :icon="social.icon"
-                    :aria-label="social.name" />
+                <ul class="mt-8 flex justify-center gap-3" aria-label="Social profiles">
+                    <li v-for="contact in socialContacts" :key="contact.name">
+                        <a
+                            :href="contact.link"
+                            target="_blank"
+                            rel="noreferrer"
+                            :aria-label="`Open dark1zinn's ${contact.name} profile`"
+                            class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 transition hover:border-primary-400 hover:text-primary-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:hover:text-primary-300">
+                            <UIcon :name="contact.icon" class="h-5 w-5" />
+                        </a>
+                    </li>
+                </ul>
             </div>
         </UContainer>
     </section>

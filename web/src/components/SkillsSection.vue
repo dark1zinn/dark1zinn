@@ -1,78 +1,54 @@
 <script setup lang="ts">
-import { items, dailyDrivers, familiarWith, explored } from '@/utils/skills'
+import { dailyDrivers, explored, familiarWith } from '@/utils/skills'
+
+const groups = [
+    {
+        title: 'Daily drivers',
+        description: 'The tools I reach for when building and shipping software.',
+        technologies: dailyDrivers,
+    },
+    {
+        title: 'Familiar with',
+        description: 'Technologies I can use effectively across a product stack.',
+        technologies: familiarWith,
+    },
+    {
+        title: 'Explored',
+        description: 'Tools I have worked with while learning different problem spaces.',
+        technologies: explored,
+    },
+]
 </script>
 
 <template>
-    <section id="skills" class="py-24">
+    <section id="skills" class="section-space">
         <UContainer>
-            <div class="text-center mb-16">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-50 dark:bg-secondary-950/30 text-secondary-600 dark:text-secondary-400 text-sm font-medium mb-6">
-                    <UIcon name="lucide:cpu" class="w-4 h-4" />
-                    Tech Stack
-                </div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Technologies I Use</h2>
-                <p class="text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                    A curated list of tools and technologies I use to build digital products.
+            <div class="max-w-2xl">
+                <p class="section-kicker">Skills</p>
+                <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+                    A practical, evolving toolkit.
+                </h2>
+                <p class="mt-5 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
+                    Technologies I use to build, maintain, and improve software.
                 </p>
             </div>
 
-            <div class="max-w-5xl mx-auto">
-                <UTabs :items="items" class="w-full">
-                    <template #daily-drivers>
-                        <div
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div
-                                v-for="tech in dailyDrivers"
-                                :key="tech.name"
-                                class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 group">
-                                <UIcon
-                                    :name="tech.icon"
-                                    class="w-10 h-10 mb-3 transition-transform group-hover:scale-110"
-                                    :class="tech.color" />
-                                <span class="text-sm font-medium text-neutral-700 dark:text-neutral-200">{{
-                                    tech.name
-                                }}</span>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template #familiar-with>
-                        <div
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div
-                                v-for="tech in familiarWith"
-                                :key="tech.name"
-                                class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:border-primary-500 dark:hover:border-primary-500 hover:shadow-lg hover:shadow-primary-500/10 transition-all duration-300 group">
-                                <UIcon
-                                    :name="tech.icon"
-                                    class="w-8 h-8 mb-3 transition-transform group-hover:scale-110"
-                                    :class="tech.color" />
-                                <span class="text-sm font-medium text-neutral-700 dark:text-neutral-200">{{
-                                    tech.name
-                                }}</span>
-                            </div>
-                        </div>
-                    </template>
-
-                    <template #explored>
-                        <div
-                            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                            <div
-                                v-for="tech in explored"
-                                :key="tech.name"
-                                class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 hover:border-success-500 dark:hover:border-success-500 hover:shadow-lg hover:shadow-success-500/10 transition-all duration-300 group">
-                                <UIcon
-                                    :name="tech.icon"
-                                    class="w-8 h-8 mb-3 transition-transform group-hover:scale-110"
-                                    :class="tech.color" />
-                                <span class="text-sm font-medium text-neutral-700 dark:text-neutral-200">{{
-                                    tech.name
-                                }}</span>
-                            </div>
-                        </div>
-                    </template>
-                </UTabs>
+            <div class="mt-12 grid gap-5 lg:grid-cols-3">
+                <section v-for="group in groups" :key="group.title" class="surface-card">
+                    <h3 class="text-lg font-semibold">{{ group.title }}</h3>
+                    <p class="mt-2 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
+                        {{ group.description }}
+                    </p>
+                    <ul class="mt-6 flex flex-wrap gap-2" :aria-label="group.title">
+                        <li
+                            v-for="technology in group.technologies"
+                            :key="technology.name"
+                            class="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-2 text-sm font-medium dark:border-neutral-700 dark:bg-neutral-800">
+                            <UIcon :name="technology.icon" class="h-4 w-4" :class="technology.color" />
+                            {{ technology.name }}
+                        </li>
+                    </ul>
+                </section>
             </div>
         </UContainer>
     </section>
